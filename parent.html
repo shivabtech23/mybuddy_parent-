@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f8f9fa;
+            font-size: 16px;
+            height: 100vh;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 280px;
+            background-color: #005a8d;
+            padding: 30px 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .sidebar h2 {
+            font-size: 1.8em;
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 5px;
+            margin-bottom: 12px;
+        }
+
+        .sidebar a:hover {
+            background-color: #0288d1;
+            transform: scale(1.05);
+        }
+
+        .sidebar a img {
+            width: 28px;
+            height: 28px;
+            margin-right: 15px;
+        }
+
+        /* Parental controls toggle switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            margin-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        .toggle-label {
+            font-size: 1em;
+            color: #fff;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #bbb;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-switch:before {
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 22px;
+            height: 22px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active {
+            background-color: #4caf50;
+        }
+
+        .toggle-switch.active:before {
+            transform: translateX(30px);
+        }
+
+        /* Main content area */
+        .main-content {
+            flex: 1;
+            background-color: #f4f7fb;
+            padding: 40px 30px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        /* Dashboard layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        /* Activity and analytics section */
+        .activity {
+            grid-column: span 2;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity h2 {
+            font-size: 2em;
+            color: #005a8d;
+            margin-bottom: 20px;
+        }
+
+        .activity p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        /* Placeholder for charts */
+        .chart {
+            grid-column: span 1;
+            height: 350px;
+            background-color: #e3f2fd;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #333;
+        }
+    </style>
+    <!-- Link to Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Parent Dashboard</h2>
+        <a href="profile.html"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs4X-6zwc7EeWj5F1drGEKTubHh16IuwUVKrHMJGAAy6I6mfyQI8e1K0ANAkNRFR9tifE&usqp=CAU=" alt="Profile Icon">Profile</a>
+        <a href="kids-profile.html"><img src="data:image/png;base64,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" alt="Kid's Profile Icon">Kid's Profile</a>
+        
+        <!-- Parental Controls -->
+        <div class="toggle-container">
+            <span class="toggle-label">Lock Child's Phone</span>
+            <div class="toggle-switch" onclick="toggleSwitch(this, 'Child\'s phone')"></div>
+        </div>
+        
+        <div class="toggle-container">
+            <span class="toggle-label">Screen Time Limit</span>
+            <div class="toggle-switch" onclick="toggleSwitch(this, 'Screen time limit')"></div>
+        </div>
+
+        <div class="toggle-container">
+            <span class="toggle-label">Restrict App Usage</span>
+            <div class="toggle-switch" onclick="toggleSwitch(this, 'App usage restriction')"></div>
+        </div>
+
+        <div class="toggle-container">
+            <span class="toggle-label">Block Internet Access</span>
+            <div class="toggle-switch" onclick="toggleSwitch(this, 'Internet access')"></div>
+        </div>
+    </div>
+
+    <!-- Main content area -->
+    <div class="main-content">
+        <!-- Header with greeting -->
+        <div class="header">
+            <h1>Good Afternoon</h1>
+        </div>
+
+        <!-- Dashboard with cards and analytics -->
+        <div class="dashboard">
+            <!-- Activity Summary Section -->
+            <div class="activity">
+                <h2>Recent Activity Summary</h2>
+                <p>Track screen time, apps used, and other activity metrics for your child.</p>
+            </div>
+
+            <!-- Card for Recommendations -->
+            <a href="recommendations.html" class="card">
+                <img src="data:image/png;base64,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" alt="Recommendations Icon">
+                <h3>Recommendations</h3>
+            </a>
+
+            <!-- Card for Progress Comparison -->
+            <a href="progress.html" class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs0zgKa1c9PWKIKxGB3n94Zz2NRVC9vvgi-g&s" alt="Progress Icon">
+                <h3>Progress Comparison</h3>
+            </a>
+
+            <!-- Card for Setting Goals -->
+            <a href="set-goals.html" class="card">
+                <img src="https://media.istockphoto.com/id/529250801/vector/successful-shoot-darts-target-aim-icon-on-white-background.jpg?s=612x612&w=0&k=20&c=wVawZCswoOyNBmqe0S-ZZu8-7QZsO9usdajQJXlrwzU=" alt="Set Goals Icon">
+                <h3>Set Goals</h3>
+            </a>
+
+            <!-- Card for Notifications -->
+            <a href="notifications.html" class="card">
+                <img src="https://png.pngtree.com/png-vector/20190505/ourmid/pngtree-vector-notification-icon-png-image_1023272.jpg" alt="Notifications Icon">
+                <h3>Receive Notifications</h3>
+            </a>
+
+            <!-- Placeholder for a Chart or Graph -->
+            <div class="chart">
+                <canvas id="activityChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle switch functionality
+        function toggleSwitch(element, featureName) {
+            element.classList.toggle("active");
+            if (element.classList.contains("active")) {
+                alert(`${featureName} is now activated.`);
+            } else {
+                alert(`${featureName} is now deactivated.`);
+            }
+        }
+
+        // Chart.js for Activity Chart
+        const ctx = document.getElementById('activityChart').getContext('2d');
+        const activityChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Screen Time', 'Apps Used', 'Goals Achieved', 'Tasks Completed'],
+                datasets: [{
+                    label: 'Daily Activity Metrics',
+                    data: [2.5, 3, 1, 4], // Example data values, modify as needed
+                    backgroundColor: ['#4caf50', '#0288d1', '#ff9800', '#673ab7']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

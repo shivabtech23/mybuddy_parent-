@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Goals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #005a8d;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #005a8d;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0073b7;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Set Goals</h1>
+
+    <div class="content">
+        <form id="goal-form">
+            <label for="goal">Goal:</label>
+            <input type="text" id="goal" name="goal" placeholder="E.g., Complete 2 hours of reading daily">
+            <button type="submit">Set Goal</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("goal-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const goal = document.getElementById("goal").value;
+            if (goal) {
+                alert(`Goal set: ${goal}`);
+                document.getElementById("goal").value = "";
+            }
+        });
+    </script>
+
+</body>
+</html>
